@@ -11,13 +11,14 @@ class HomePageStateful extends StatefulWidget {
 
 class _HomePageStateful extends State<HomePageStateful> {
   List<User> users = [];
+  bool isLoading = true;
 
   void fetchUsers() async {
+    isLoading = true;
     final result = await UserService.fetchUsers();
     users = result;
-    setState(() {
-      
-    });
+    setState(() {});
+    isLoading = false;
   }
 
   @override
@@ -34,7 +35,9 @@ class _HomePageStateful extends State<HomePageStateful> {
           'Get Api Stateful'
         ),
       ),
-      body: ListView.builder(
+      body: isLoading ? Center(
+        child: CircularProgressIndicator(),) 
+      : ListView.builder(
         itemCount: users.length,
         itemBuilder: (context, index) {
           final user = users[index];
