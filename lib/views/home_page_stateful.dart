@@ -40,7 +40,10 @@ class _HomePageStateful extends State<HomePageStateful> {
           final user = users[index];
           return Card(
             child: ListTile(
-              title: Text(user.firstName),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(user.avatar),
+              ),
+              title: Text('${user.firstName} ${user.lastName}'),
               subtitle: Text(user.email),
             ),
           );
